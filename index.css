@@ -198,3 +198,9 @@ footer p {
 #pesquisar:hover {
     background-color: #0056b3;
 }
+
+.card-noticia {
+    text-decoration: none; /* Remove o sublinhado do texto */
+    color: inherit;        /* Mantém a cor original do seu texto */
+    display: block;        /* Faz o link se comportar como uma div */
+}
