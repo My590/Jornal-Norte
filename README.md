@@ -10,7 +10,6 @@
 - Rafael Guerra Lacerda Almeida
 - Thomás da Silva Marques Pereira
 
-
 ## 🌎 Representação Regional
 
 A Região Norte será representada por meio de conteúdos relacionados a diferentes aspectos da realidade local, incluindo:
@@ -23,8 +22,6 @@ A Região Norte será representada por meio de conteúdos relacionados a diferen
 
 O jornal busca abordar uma grande variedade de temas, oferecendo uma experiência informativa e dinâmica. Além das notícias, o site contará com uma **tirinha** e uma **tabela de previsão do tempo**, tornando a navegação mais interativa e agradável.
 
----
-
 ## 🎨 Paleta de Cores
 
 A identidade visual do projeto utiliza principalmente a cor **verde**, que está associada a:
@@ -34,7 +31,6 @@ A identidade visual do projeto utiliza principalmente a cor **verde**, que está
 - 😌 Tranquilidade.
 
 Com essa escolha, buscamos transmitir a ideia de um jornal **interessante, acolhedor e agradável de ler**, refletindo a riqueza natural e cultural da Região Norte.
-
 
 ## 🔗 Wireframe
 
