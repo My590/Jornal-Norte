@@ -7,7 +7,7 @@ btn.addEventListener("click", (e) => {
     
     // 🎯 SELEÇÃO DIRETA: Pegamos todos os elementos que REALMENTE contêm os textos
     // Buscamos os parágrafos dentro dos cards, os h3, e os parágrafos dos títulos
-    const elementosDeTexto = document.querySelectorAll(".card-noticia p, h3, .titulo-noticias p, .dados p");
+    const elementosDeTexto = document.querySelectorAll(".card-noticia p, h3, .titulo-noticias p, .dados p, .corpo-texto");
 
     elementosDeTexto.forEach(el => {
         // Salva o texto original se for a primeira vez rodando
