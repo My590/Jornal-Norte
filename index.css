@@ -204,3 +204,28 @@ footer p {
     color: inherit;        /* Mantém a cor original do seu texto */
     display: block;        /* Faz o link se comportar como uma div */
 }
+
+.podcast {
+    display: flex;
+    gap: 20px;
+    width: 80%;
+    margin-left: 100px;
+    align-items: flex-start;
+}
+
+.podcast-texto {
+    flex: 1;
+}
+
+.podcast-video {
+    flex: 1;
+}
+
+.api-bloco {
+    width: 80%;
+    margin-left: 100px;
+    padding: 15px;
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
