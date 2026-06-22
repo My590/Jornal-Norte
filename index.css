@@ -3,10 +3,7 @@ body {
   grid-template-rows: auto 1fr auto; /* header, conteúdo, footer */
   min-height: 100vh;
   margin: 0;
-}
-
-img {
-height:100px;
+  font-family: Georgia, "Times New Roman", serif;
 }
 
 header {
@@ -16,7 +13,7 @@ header {
     gap: 10px;
     flex-wrap: wrap;
     text-align: center;
-    padding: 10px;
+  
 }
 
 header img {
@@ -27,6 +24,8 @@ header img {
 h1 {
     font-size: clamp(1.3rem, 4vw, 2rem);
     margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: bold;
 }
 
 nav {
@@ -34,11 +33,13 @@ nav {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 25px;
     background-color: #6CBD26;
     padding: 12px;
-    margin: 10px;
+    margin: 15px;
     border-radius: 10px;
+    width: auto;
+    margin: 15px;
 }
 
 .search-container{
@@ -62,12 +63,9 @@ h3 {
 }
 
 p {
-    font-family: Georgia, "Times New Roman", serif;
     font-size: 18px;
     line-height: 1.8;
     text-align: justify;
-
-    /* estilo jornal com colunas */
     column-gap: 30px;
     padding: 0 20px;
     margin-bottom: 15px;
@@ -113,7 +111,6 @@ p {
     object-fit: cover;
 }
 
-/* texto */
 .card-noticia p {
     padding: 12px;
     font-size: 16px;
@@ -137,20 +134,22 @@ p {
     width: calc(100% - 20px);
     margin: 20px auto;
     max-width: 1309px;
+    background-color: #6CBD26;
+    color: white;
+    border-radius: 10px;
 }
 
 .titulo-noticias p {
     margin: 0;
-    
+    text-align: center;
 }
 
 footer{
     background-color: #6CBD26;
     color:#fff;
-    margin: none;
-    padding: none;
-    text-align: center;
+    margin: 0;
     padding: 25px 15px;
+    text-align: center;
     margin-top: 40px;
 }
 
@@ -168,7 +167,7 @@ footer p {
 
 .equipe span{
     background-color: rgba(255,255,255,0.15);
-    padding: 8px 15px;
+    padding: 8px 12px;
     border-radius: 20px;
 }
 
@@ -191,12 +190,9 @@ footer p {
     border-radius: 3px !important;        /* Cantos arredondados */
 }
 
-.barra-pesquisa {
-    display: flex;
-    flex-wrap: wrap;
-    border-radius: 25px;
-    justify-content: center;
-    gap: 10px;
+#pesquisa {
+    width: min(300px, 80vw);
+
 }
 
 #pesquisa {
@@ -213,6 +209,7 @@ footer p {
     border-radius: 5px;
     color:white;
     border: none;
+    padding: 8px 12px;
     background-color: #187de9;
 }
 
@@ -225,8 +222,8 @@ footer p {
 .podcast {
     display: flex;
     gap: 20px;
-    width: 80%;
-    margin-left: 100px;
+    width: min(1000px, 90%);
+    margin: auto;
     align-items: flex-start;
 }
 
@@ -239,11 +236,8 @@ footer p {
 }
 
 .api-bloco {
-    width: 80%;
-    margin-left: 100px;
-    padding: 15px;
-    background: #f5f5f5;
-    border-radius: 10px;
+    width: min(1000px, 90%);
+    margin: 20px auto;
 }
 
 @media (max-width: 768px) {
@@ -280,5 +274,9 @@ footer p {
 
     .noticias {
         grid-template-columns: 1fr;
+    }
+
+    .podcast {
+    flex-direction: column;
     }
 }
