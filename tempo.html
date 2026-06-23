@@ -1,82 +1,170 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Norte Hub - Monitoramento de Todos os Municípios</title>
-    <!-- Vinculação do arquivo CSS externo -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="tempo.css">
+    <title>Conexão Amazônia - Previsão do Tempo</title>
 </head>
 <body>
 
     <header>
-        <h1>Portal de Monitoramento - Região Norte</h1>
-        <p>Dados de Câmbio e Informações Climáticas Dinâmicas para os municípios do Norte.</p>
-    </header>
-
-    <div class="controls-row">
-        <div class="search-container">
-            <input type="text" id="city-input" list="norte-cities" placeholder="Digite e selecione o município (Ex: Palmas, Araguaína, Parintins...)" style="width: 100%;">
-            <datalist id="norte-cities"></datalist>
-            <button class="btn-search" onclick="fetchDataFromServer()">Monitorar</button>
+        <img src="imagem.png" alt="Logo Conexão Amazônia">
+        <h1>Conexão Amazônia - Jornal da Região Norte</h1>
+    </header>    
+              
+    <nav>
+        <a href="index.html">Notícias Gerais</a>
+        <a href="tirinhas.html">Tirinhas da região</a>
+        <a href="tempo.html" class="active">Previsão do tempo</a>
+           
+        <div class="barra-pesquisa">
+            <input type="text" id="pesquisa" placeholder="Procurar">
+            <button id="pesquisar">Pesquisar</button>
         </div>
-    </div>
+    </nav>
+                
+    <div id="resultados"></div>
 
-    <div class="dashboard">
-
-        <div class="insight-banner" id="insight-box">
-            Sincronizando malha geográfica da Região Norte...
+    <main>
+        <div class="controls-row">
+            <div class="search-container">
+                <input type="text" id="city-input" list="norte-cities" placeholder="Digite e selecione o município (Ex: Palmas, Araguaína, Parintins...)" style="width: 100%;">
+                <datalist id="norte-cities"></datalist>
+                <button class="btn-search" onclick="fetchDataFromServer()">Monitorar</button>
+            </div>
         </div>
 
-        <!-- MÓDULO CLIMA -->
-        <div class="card">
-            <div class="loader" id="weather-loader">Sincronizando com satélites...</div>
-            <div class="card-title">
-                <span id="weather-card-title">🌦️ Análise Meteorológica</span>
-                <div class="tabs">
-                    <button class="tab-btn active" id="btn-today" onclick="switchWeatherView('today')">Info do Dia</button>
-                    <button class="tab-btn" id="btn-hourly" onclick="switchWeatherView('hourly')">Por Horário</button>
-                    <button class="tab-btn" id="btn-week" onclick="switchWeatherView('week')">Dias da Semana</button>
+        <div class="dashboard">
+
+            <div class="insight-banner" id="insight-box">
+                Sincronizando malha geográfica da Região Norte...
+            </div>
+
+            <div class="card">
+                <div class="loader" id="weather-loader">Sincronizando com satélites...</div>
+                <div class="card-title" style="display: block !important; background-color: #4f9f09 !important;">
+                   
+                    <span id="weather-card-title" style="color: #ffffff; display: inline-block; font-weight: bold; font-size: 1.05rem;">Análise Meteorológica</span>
+                    <br><br>
+                    <div class="tabs">
+                        <button class="tab-btn active" id="btn-today" onclick="switchWeatherView('today')">Info do Dia</button>
+                        <button class="tab-btn" id="btn-hourly" onclick="switchWeatherView('hourly')">Por Horário</button>
+                        <button class="tab-btn" id="btn-week" onclick="switchWeatherView('week')">Dias da Semana</button>
+                    </div>
+                </div>
+            
+
+                <div id="view-today" class="weather-list"></div>
+                <div id="view-hourly" class="weather-list hidden"></div>
+                <div id="view-week" class="weather-list hidden"></div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Câmbio Comercial e Aportes</div>
+                
+                <div style="margin-bottom: 15px;">
+                    <select id="currency-selector" onchange="handleCurrencyChange()" style="width: 100%;">
+                        <option value="USD">Dólar (USD)</option>
+                        <option value="EUR">Euro (EUR)</option>
+                    </select>
+                </div>
+                
+                <div class="currency-badge" id="currency-rate">R$ --</div>
+                
+                <div style="margin-bottom: 10px;">
+                    <label id="budget-label" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Montante em Moeda Estrangeira para conversão:</label>
+                    <input type="number" id="travel-budget" value="1000" oninput="calculateConversion()" style="width: 100%; margin-top: 5px; box-sizing: border-box;">
+                </div>
+
+                <div class="calc-result-box">
+                    <span style="font-size: 0.85rem; color: var(--text-muted); display:block; margin-bottom: 5px;">Aporte líquido estimado em Real (BRL):</span>
+                    <strong id="final-foreign-value" style="font-size: 1.3rem; color: var(--accent);">--</strong>
                 </div>
             </div>
 
-            <!-- Aba 1: Info do Dia -->
-            <div id="view-today" class="weather-list"></div>
+            <div class="card">
+                <div class="card-title">Termômetro de Adaptação Nortista</div>
+                
+                <div class="thermometer-wrapper">
+                    <div class="thermometer-labels">
+                        <span>🥶 Frio</span>
+                        <span>Calor 🔥</span>
+                    </div>
+                    <div class="thermometer-container">
+                        <div id="thermometer-bar" class="thermometer-bar"></div>
+                    </div>
+                    
+                    <div id="interactive-zone" class="interactive-weather-zone">
+                        <span style="color: var(--text-muted); font-size: 0.85rem;">Aguardando dados...</span>
+                    </div>
+                </div>
+
+                <div class="humor-box">
+                    <span id="humor-status">Selecione um município para calibrar o termômetro.</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Guia de Clima & Vivência Local</div>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: -5px; margin-bottom: 15px;">
+                    Veja como aproveitar o dia na cidade com base na temperatura em tempo real.
+                </p>
+
+                <div class="cultural-guide-box">
+                    <span class="cultural-tag">Cardápio do Dia</span>
+                    <h4 class="cultural-title" id="culinaria-titulo">Recomendação Gastronômica</h4>
+                    <p class="cultural-desc" id="culinaria-desc">Selecione uma cidade para ver a dica de culinária para hoje.</p>
+                </div>
+
+                <div class="cultural-guide-box" style="background: #edf2f7; border-color: #cbd5e0;">
+                    <span class="cultural-tag" style="background: #e2e8f0; color: #4a5568;">Roteiro Nortista</span>
+                    <h4 class="cultural-title" id="passeio-titulo" style="color: #2d3748;">O que fazer agora</h4>
+                    <p class="cultural-desc" id="passeio-desc">Descubra qual é a melhor programação para o clima atual.</p>
+                </div>
+            </div>
+
+        </div>
+        
+        <br><br>
+ 
+        <div class="titulo-noticias"><p>Últimas Notícias</p></div>
+ 
+        <div class="noticias">
+        
+            <a href="noticia2.html" class="card-noticia">
+                <img src="https://www.ufac.br/site/noticias/2026/ufac-conquista-3o-lugar-em-hackathon-internacional-promovido-por-laboratorio-de-harvard/ufac-conquista-3o-lugar-em-hackathon-internacional-promovido-por-laboratorio-de-harvard-capa.jpg/@@images/be5f3b03-1510-4d1f-bde4-e1c0373e9922.jpeg" alt="Notícia UFAC">
+                <p>Estudantes da UFAC conquistam histórico 3º lugar em hackathon organizado por Harvard.</p>
+            </a>
+        
+            <a href="noticia5.html" class="card-noticia">
+                <img src="https://wallpaperaccess.com/full/2372914.jpg" alt="Notícia Remo">
+                <p>Remo perde de virada para o Athletico-PR e se complica na tabela.</p>
+            </a>
             
-            <!-- Aba 2: Por Horário -->
-            <div id="view-hourly" class="weather-list hidden"></div>
-            
-            <!-- Aba 3: Dias da Semana -->
-            <div id="view-week" class="weather-list hidden"></div>
+            <a href="noticia4.html" class="card-noticia">
+                <img src="https://ac24horas.com/wp-content/uploads/2026/02/976x695_IMAGEM-DESTACADA-52-3.avif" alt="Notícia Acre">
+                <p>Acre recebe mais de R$ 600 milhões em repasses federais durante o mês de maio</p>
+            </a>
+        
+        </div>
+    </main>
+ 
+    <footer>
+        <div class="equipe">
+            <span>Letícia Pires de Almeida</span>
+            <span>Lucas de Jesus Gonçalves</span>
+            <span>Milena de Bastos Miranda</span>
+            <span>Rafael Guerra Lacerda Almeida</span>                    
+            <span>Thomás da Silva Marques Pereira</span>
         </div>
 
-        <!-- MÓDULO FINANCEIRO -->
-        <div class="card">
-            <div class="card-title">💵 Câmbio Comercial e Aportes</div>
-            
-            <div style="margin-bottom: 15px;">
-                <select id="currency-selector" onchange="handleCurrencyChange()" style="width: 100%;">
-                    <option value="USD">Dólar (USD)</option>
-                    <option value="EUR">Euro (EUR)</option>
-                </select>
-            </div>
-            
-            <div class="currency-badge" id="currency-rate">R$ --</div>
-            
-            <div style="margin-bottom: 10px;">
-                <label id="budget-label" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Montante em Moeda Estrangeira para conversão:</label>
-                <input type="number" id="travel-budget" value="1000" oninput="calculateConversion()" style="width: 100%; margin-top: 5px; box-sizing: border-box;">
-            </div>
+        <p class="copyright">
+            © 2026 - Todos os direitos reservados
+        </p>       
+    </footer>
 
-            <div class="calc-result-box">
-                <span style="font-size: 0.85rem; color: var(--text-muted); display:block; margin-bottom: 5px;">Aporte líquido estimado em Real (BRL):</span>
-                <strong id="final-foreign-value" style="font-size: 1.3rem; color: var(--accent);">--</strong>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Vinculação do arquivo JavaScript externo -->
     <script src="tempo.js"></script>
 </body>
 </html>

@@ -6,6 +6,7 @@ let currentRate = 1.0;
 let selectedCurrency = "USD";
 let ratesDatabase = null;
 let cidadesMapeadas = {}; 
+let ultimaTemperaturaGeral = 28;
 
 window.onload = async () => {
     await carregarMunicipiosNorte();
@@ -41,7 +42,7 @@ async function carregarMunicipiosNorte() {
                 const latReal = centroidesUF[ufSigla].lat + (mun.id % 2 === 0 ? semente : -semente);
                 const lonReal = centroidesUF[ufSigla].lon + (mun.id % 3 === 0 ? semente : -semente);
 
-                cidadesMapeadas[chaveUnica] = { lat: latReal, lon: lonReal, nome: nomeCidade };
+                cidadesMapeadas[chaveUnica] = { lat: latReal, lon: lonReal, nome: nomeCidade, uf: ufSigla };
 
                 const option = document.createElement('option');
                 option.value = chaveUnica;
@@ -75,10 +76,13 @@ async function fetchDataFromServer() {
         ]);
 
         ratesDatabase = currencyRes;
+        ultimaTemperaturaGeral = weatherRes.current_weather.temperature;
         
         renderWeather(cidadeCoords.nome, weatherRes);
         updateCurrencyDisplay();
         generateAnalysis(cidadeCoords.nome, weatherRes.current_weather);
+        atualizarTermometroHumor(ultimaTemperaturaGeral);
+        atualizarGuiaCultural(cidadeCoords.nome);
 
     } catch (error) {
         console.error(error);
@@ -93,7 +97,7 @@ function renderWeather(nomeCidade, data) {
     const hourlyContainer = document.getElementById('view-hourly');
     const weekContainer = document.getElementById('view-week');
     
-    document.getElementById('weather-card-title').innerText = `🌦️ Clima em ${nomeCidade}`;
+    document.getElementById('weather-card-title').innerText = `Clima em ${nomeCidade}`;
 
     todayContainer.innerHTML = "";
     hourlyContainer.innerHTML = "";
@@ -103,15 +107,13 @@ function renderWeather(nomeCidade, data) {
     const maxHoje = data.daily.temperature_2m_max[0];
     const minHoje = data.daily.temperature_2m_min[0];
 
-    // 1. Aba: Info do Dia (Sem coordenadas)
     todayContainer.innerHTML = `
-        <div class="weather-item"><span>🌡️ Temperatura Atual</span><strong>${cur.temperature}°C</strong></div>
-        <div class="weather-item"><span>🔥 Máxima de Hoje</span><strong>${maxHoje.toFixed(0)}°C</strong></div>
-        <div class="weather-item"><span>❄️ Mínima de Hoje</span><strong>${minHoje.toFixed(0)}°C</strong></div>
-        <div class="weather-item"><span>💨 Velocidade do Vento</span><strong>${cur.windspeed} km/h</strong></div>
+        <div class="weather-item"><span>Temperatura Atual</span><strong>${cur.temperature}°C</strong></div>
+        <div class="weather-item"><span>Máxima de Hoje</span><strong>${maxHoje.toFixed(0)}°C</strong></div>
+        <div class="weather-item"><span>Mínima de Hoje</span><strong>${minHoje.toFixed(0)}°C</strong></div>
+        <div class="weather-item"><span>Velocidade do Vento</span><strong>${cur.windspeed} km/h</strong></div>
     `;
 
-    // 2. Aba: Por Horário (Próximas 6 horas)
     const horaAtual = new Date().getHours();
     for(let i = 0; i < 6; i++) {
         const indiceHora = (horaAtual + i) % 24; 
@@ -120,14 +122,13 @@ function renderWeather(nomeCidade, data) {
             const labelHora = `${String(indiceHora).padStart(2, '0')}:00`;
             hourlyContainer.innerHTML += `
                 <div class="weather-item hourly">
-                    <span>⏰ Horário: ${labelHora}</span>
+                    <span>Horário: ${labelHora}</span>
                     <strong>${tempHora.toFixed(1)}°C</strong>
                 </div>
             `;
         }
     }
 
-    // 3. Aba: Dias da Semana
     const diasFalsos = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
     const hoje = new Date().getDay();
 
@@ -190,3 +191,86 @@ function generateAnalysis(nomeCidade, climaAtual) {
         banner.style.background = "linear-gradient(135deg, #1b4332, #2d6a4f)";
     }
 }
+
+function atualizarTermometroHumor(temperatura) {
+    const barra = document.getElementById('thermometer-bar');
+    const texto = document.getElementById('humor-status');
+    const zonaInterativa = document.getElementById('interactive-zone');
+    
+    let porcentagem = ((temperatura - 15) / (40 - 15)) * 100;
+    porcentagem = Math.max(0, Math.min(100, porcentagem));
+    
+    barra.style.width = `${porcentagem}%`;
+    zonaInterativa.innerHTML = "";
+
+    let emojiClima = "☀️";
+    if(temperatura < 27) {
+        emojiClima = "🌧️";
+    }
+
+    for(let i = 0; i < 6; i++) {
+        const spanIcone = document.createElement('span');
+        spanIcone.classList.add('floating-icon');
+        spanIcone.innerText = emojiClima;
+        spanIcone.style.animationDelay = `${i * 0.3}s`; 
+        zonaInterativa.appendChild(spanIcone);
+    }
+
+    if (temperatura < 27) {
+        if (temperatura < 23) {
+            texto.innerHTML = `🥶 <b>Friagem detectada!</b> (${temperatura}°C). O nortista já está tirando o casaco de frio do armário e tomando um cafezinho quente.`;
+        } else {
+            texto.innerHTML = `☁️ <b>Clima "Agradável":</b> (${temperatura}°C). Provavelmente caiu aquela chuva da tarde. Hora perfeita para tomar um tacacá na cuia!`;
+        }
+    } else {
+        if (temperatura >= 27 && temperatura < 33) {
+            texto.innerHTML = `☀️ <b>Calor Padrão:</b> (${temperatura}°C). O mormaço tá pegando, mas o nortista tá firme tomando um açaí com peixe frito pra aguentar.`;
+        } else {
+            texto.innerHTML = `🔥 <b>Calor Humaitá!</b> (${temperatura}°C). O vento tá vindo direto do inferno. Ar-condicionado no 18°C ou o jeito é pular no rio!`;
+        }
+    }
+}
+
+function atualizarGuiaCultural(nomeCidade) {
+    const culinariaTitulo = document.getElementById('culinaria-titulo');
+    const culinariaDesc = document.getElementById('culinaria-desc');
+    const passeioTitulo = document.getElementById('passeio-titulo');
+    const passeioDesc = document.getElementById('passeio-desc');
+
+    if (ultimaTemperaturaGeral < 27) {
+        culinariaTitulo.innerText = "Tacacá Quente na Cuia";
+        culinariaDesc.innerText = `Com a temperatura em ${ultimaTemperaturaGeral}°C, o clima está perfeito para tomar um tacacá quentinho na praça de ${nomeCidade}. O tucupi e o jambu vão ajudar a aquecer o corpo!`;
+        passeioTitulo.innerText = "Programação em Espaço Coberto";
+        passeioDesc.innerText = "Aproveite o tempo fresco ou chuvoso para visitar um mercado municipal coberto, centros culturais locais ou simplesmente curtir o vento lendo um livro na varanda.";
+    } else {
+        culinariaTitulo.innerText = "Peixe Frito com Açaí do Grosso";
+        culinariaDesc.innerText = `Está fazendo ${ultimaTemperaturaGeral}°C! Enfrente esse calorão com um autêntico açaí nortista bem gelado acompanhado de peixe frito, ou saboreie um sorvete de cupuaçu ou tapioca.`;
+        passeioTitulo.innerText = "Banho de Rio ou Igarapé";
+        passeioDesc.innerText = `O mormaço está forte em ${nomeCidade}. A melhor pedida para os locais e visitantes agora é procurar o balneário, praia de água doce ou igarapé mais próximo para se refrescar.`;
+    }
+}
+
+// BARRA DE PESQUISA DO JORNAL INTEGRADA
+const btnPesquisarJornal = document.getElementById("pesquisar");
+btnPesquisarJornal.addEventListener("click", (e) => {
+    e.preventDefault(); 
+    const termo = document.getElementById("pesquisa").value.trim();
+    const elementosDeTexto = document.querySelectorAll(".card-noticia p, h3, .titulo-noticias p, .card-title, .cultural-desc, .humor-box, .weather-item span");
+
+    elementosDeTexto.forEach(el => {
+        if (!el.dataset.original) {
+            el.dataset.original = el.textContent;
+        }
+        const textoOriginal = el.dataset.original;
+        if (termo === "") {
+            el.innerHTML = textoOriginal;
+            return;
+        }
+        const regex = new RegExp(`(${termo})`, "gi");
+        if (textoOriginal.toLowerCase().includes(termo.toLowerCase())) {
+            el.innerHTML = textoOriginal.replace(regex, `<span class="highlight">$1</span>`);
+        } else {
+            el.innerHTML = textoOriginal;
+        }
+    });
+});
