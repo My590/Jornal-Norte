@@ -1,11 +1,11 @@
 body {
-  display: grid;
-  grid-template-rows: auto 1fr auto; 
-  min-height: 100vh;
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
+    display: grid;
+    grid-template-rows: auto 1fr auto; 
+    min-height: 100vh;
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
 }
-
+  
 header {
     display: flex;
     align-items: center;
@@ -13,21 +13,20 @@ header {
     gap: 10px;
     flex-wrap: wrap;
     text-align: center;
-  
 }
-
+  
 header img {
     width: 100px;
     height: auto;
 }
-
+  
 h1 {
     font-size: clamp(1.3rem, 4vw, 2rem);
     margin: 0;
     font-family: Georgia, "Times New Roman", serif;
     font-weight: bold;
 }
-
+  
 nav {
     display: flex;
     flex-wrap: wrap;
@@ -41,27 +40,27 @@ nav {
     width: auto;
     margin: 15px;
 }
-
+  
 .search-container{
     height: 70%;
 }
-
+  
 a{
     color: rgb(255, 255, 255);
     text-decoration: none;
 }
-
+  
 a:hover{
     text-decoration: underline;
 }
-
+  
 h3 {
     padding-left: 20px;
     font-size: 22px;
     font-weight: bold;
     margin-bottom: 10px;
 }
-
+  
 p {
     font-size: 18px;
     line-height: 1.8;
@@ -70,12 +69,12 @@ p {
     padding: 0 20px;
     margin-bottom: 15px;
 }
-
+  
 .corpo-texto, h3, .dados {
     width: min(900px, 90%);
     margin: auto;
 }
-
+  
 .img-noticia {
     width: 80%;
     max-width: 400px;
@@ -84,15 +83,14 @@ p {
     display: block;
     margin: 20px auto;
 }
-
+  
 .noticias {
     display: grid;
-    grid-template-columns:
-    repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
     margin: 20px;
 }
-
+  
 .card-noticia {
     background: #fff;
     border-radius: 10px;
@@ -100,36 +98,36 @@ p {
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     transition: transform 0.2s ease;
 }
-
+  
 .card-noticia:hover {
     transform: scale(1.03);
 }
-
+  
 .card-noticia img {
     width: 100%;
     height: 180px;
     object-fit: cover;
 }
-
+  
 .card-noticia p {
     padding: 12px;
     font-size: 16px;
     line-height: 1.5;
     text-align: justify;
 }
-
+  
 .dados {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
 }
-
+  
 .descricao {
     font-size:small;
     text-align: center;
     color: darkgray;
 }
-
+  
 .titulo-noticias {
     width: calc(100% - 20px);
     margin: 20px auto;
@@ -138,12 +136,12 @@ p {
     color: white;
     border-radius: 10px;
 }
-
+  
 .titulo-noticias p {
     margin: 0;
     text-align: center;
 }
-
+  
 footer{
     background-color: #6CBD26;
     color:#fff;
@@ -152,7 +150,7 @@ footer{
     text-align: center;
     margin-top: 40px;
 }
-
+  
 .equipe{
     display: flex;
     justify-content: center;
@@ -160,51 +158,50 @@ footer{
     flex-wrap: wrap;
     margin: 15px 0;
 }
-
+  
 footer p {
     text-align: center;
 }
-
+  
 .equipe span{
     background-color: rgba(255,255,255,0.15);
     padding: 8px 12px;
     border-radius: 20px;
 }
-
+  
 .copyright{
     font-size: 1.0rem;
     opacity: 0.8;
 }
-
+  
 .active {
     font-weight:bolder;
     text-decoration: none !important;
 }
-
+  
 .highlight {
     background-color: #ffeb3b !important; 
-    color: #000000 !important;            
+    color: #000000 !important;           
     font-weight: bold !important;         
     display: inline-block !important;     
     padding: 0 2px !important;            
     border-radius: 3px !important;        
 }
-
+  
 #pesquisa {
     width: min(300px, 80vw);
-
 }
-
+  
 #pesquisa {
     padding: 8px;
     font-size: 16px;
     width: 300px;
 }
-
+  
 #pesquisar:hover {
     background-color: #0056b3;
 }
-
+  
 #pesquisar {
     border-radius: 5px;
     color:white;
@@ -212,7 +209,7 @@ footer p {
     padding: 8px 12px;
     background-color: #187de9;
 }
-
+  
 .card-noticia {
     text-decoration: none; 
     color: inherit;        
@@ -221,62 +218,161 @@ footer p {
 
 .podcast {
     display: flex;
-    gap: 20px;
-    width: min(1000px, 90%);
-    margin: auto;
-    align-items: flex-start;
+    gap: 35px;
+    width: min(900px, 90%); 
+    margin: 20px auto;
+    align-items: center;    
 }
-
+  
 .podcast-texto {
-    flex: 1;
+    flex: 1.8; 
 }
 
+.podcast-texto p {
+    padding: 0 0 0 20px !important; 
+    margin: 0;
+    text-align: justify;
+}
+  
 .podcast-video {
-    flex: 1;
+    flex: 1; 
+    max-width: 350px;
 }
 
+.podcast-video iframe {
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+  
 .api-bloco {
     width: min(1000px, 90%);
     margin: 20px auto;
 }
-
+  
+.jogo-memoria-container {
+    width: min(600px, 90%);
+    margin: 30px auto;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border: 1px solid #cbd5e1;
+}
+  
+.jogo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+  
+.btn-reiniciar {
+    background-color: #6CBD26;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+  
+.btn-reiniciar:hover {
+    background-color: #559e1c;
+}
+  
+.memory-game-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+  
+.memory-card {
+    height: 80px;
+    background-color: #6CBD26;
+    color: transparent;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s, transform 0.2s;
+}
+  
+.memory-card.flipped {
+    background-color: #f1f5f9;
+    color: initial;
+    transform: scale(1.02);
+    border: 2px solid #6CBD26;
+}
+  
+.memory-card.matched {
+    background-color: #d1fae5;
+    color: #065f46;
+    cursor: default;
+    border: 2px solid #a7f3d0;
+}
+  
+.game-status-box {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    color: #475569;
+}
+  
 @media (max-width: 768px) {
-
     h1 {
         font-size: 1.5rem;
     }
-
+  
     h3 {
         font-size: 1.2rem;
     }
-
+  
     p {
         font-size: 16px;
         padding: 0 10px;
     }
-
+  
     nav {
         flex-direction: column;
         gap: 12px;
     }
-
+  
     .barra-pesquisa {
         width: 100%;
     }
-
+  
     #pesquisa {
         width: 100%;
     }
-
+  
     .img-noticia {
         width: 95%;
     }
-
+  
     .noticias {
         grid-template-columns: 1fr;
     }
-
+  
     .podcast {
-    flex-direction: column;
+        flex-direction: column; 
+        gap: 15px;
+    }
+    
+    .podcast-texto p {
+        padding: 0 10px !important; 
+    }
+    
+    .memory-card {
+        height: 65px;
+        font-size: 1.6rem;
     }
 }

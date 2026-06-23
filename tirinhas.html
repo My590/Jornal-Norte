@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="tirinhas.css">
     <title>Jornal</title>
 </head>
  
 <body>
     <header>
         <img src="imagem.png">
-        <h1> Conexão Amazônia - Jornal da Região Norte </h1>
+        <h1> Conexão Amazonia - Jornal da Região Norte </h1>
     </header>    
              
         <nav>
@@ -29,39 +29,32 @@
 
         <main>
             <h3> 
-                <strong> Tirinha 1</strong>
+                <strong> Tirinhas</strong>
             </h3>
            
             <div class="dados">
                 <p>Data: 22/05/2026</p>
             </div>
 
-                <img  class="img-noticia" src= "tirinha1.jpg">
+                <img  class="img-noticia" src= "Mídia (2).jpg">
                 <p class="descricao"> Fonte: Thomás da Silva Marques Pereira</p>
 
-                <p class="corpo-texto">  Autoridades ambientais destacam que, apesar do cenário positivo, o monitoramento continuará sendo realizado de
-                    forma constante, já que eventos climáticos extremos ainda preocupam toda a região amazônica.
+                <p class="corpo-texto">  Você sabia? "Égua" pode ser usada para indicar surpresa ou espanto em relação a algo, como foi utilizado pelo turista na tirinha acima.
                 </p>
 
                 <br>
                 <br>
 
-                <h3> 
-                    <strong> Tirinha 1</strong>
-                </h3>
-
-                <img  class="img-noticia" src= "Mídia.jpg">
+                <img  class="img-noticia" src= "Mídia.png">
                 <p class="descricao"> Fonte: Thomás da Silva Marques Pereira</p>
 
-                <p class="corpo-texto">  Autoridades ambientais destacam que, apesar do cenário positivo, o monitoramento continuará sendo realizado de
-                    forma constante, já que eventos climáticos extremos ainda preocupam toda a região amazônica.
-                </p>
-
+                <p class="corpo-texto">  Kleiton foi novamente um dos destaques do jogo do papão contra o Floresta, marcando gol que posteriormente seria anulado por falta em início do lance.</p>
                 <br>
                 <br>
 
                 <h3> 
                     <strong> Podcast da Semana</strong>
+                    <br><br>
                 </h3>
 
             <div class="podcast">
@@ -79,6 +72,18 @@
                 </div>
             </div>
             
+            <br>
+            <br>
+
+            <div class="jogo-memoria-container">
+                <div class="jogo-header">
+                    <span>Jogo da Memória: Ícones do Norte</span>
+                    <button class="btn-reiniciar" onclick="initMemoryGame()">Reiniciar</button>
+                </div>
+                <div class="memory-game-grid" id="game-grid"></div>
+                <div class="game-status-box" id="game-status">Encontre os pares da cultura amazônica!</div>
+            </div>
+
             <br>
             <br>
  
@@ -117,9 +122,6 @@
                 © 2026 - Todos os direitos reservados
             </p>       
         </footer>
-        <script src="index.js"></script>
+        <script src="tirinhas.js"></script>
 </body>
-
-
- 
 </html>

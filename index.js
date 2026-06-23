@@ -5,7 +5,7 @@ btn.addEventListener("click", (e) => {
 
     const termo = document.getElementById("pesquisa").value.trim();
     
-    // 🎯 SELEÇÃO DIRETA: Pegamos todos os elementos que REALMENTE contêm os textos
+    // Pegamos todos os elementos que REALMENTE contêm os textos
     // Buscamos os parágrafos dentro dos cards, os h3, e os parágrafos dos títulos
     const elementosDeTexto = document.querySelectorAll(".card-noticia p, h3, .titulo-noticias p, .dados p, .corpo-texto");
 
