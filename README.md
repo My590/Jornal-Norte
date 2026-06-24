@@ -39,12 +39,12 @@ Confira o protótipo do projeto no Figma:
 
 ## 🌐 Site
 
-Veja o resultado do site:
+> Veja o resultado do site:
 
 👉 https://my590.github.io/Jornal-Norte/
 
----
+Gostou? Compartilhe com a gente! ☺️
 
-### 📌 Objetivo
+## 📌 Objetivo
 
 Desenvolver um portal de notícias regional que apresente informações relevantes da Região Norte de forma clara, moderna e visualmente atrativa, valorizando a cultura, a biodiversidade e os acontecimentos locais.
