@@ -73,6 +73,8 @@ p {
 .corpo-texto, h3, .dados {
     width: min(900px, 90%);
     margin: auto;
+    text-indent: 30px; 
+    line-height: 1.5;
 }
   
 .img-noticia {
@@ -226,12 +228,15 @@ footer p {
   
 .podcast-texto {
     flex: 1.8; 
+
 }
 
 .podcast-texto p {
     padding: 0 0 0 20px !important; 
     margin: 0;
     text-align: justify;
+    text-indent: 30px; 
+    line-height: 1.5;
 }
   
 .podcast-video {

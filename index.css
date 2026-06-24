@@ -74,6 +74,8 @@ p {
 .corpo-texto, h3, .dados {
     width: min(900px, 90%);
     margin: auto;
+    text-indent: 30px; 
+    line-height: 1.5;
 }
 
 .img-noticia {
